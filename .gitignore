@@ -1,0 +1,6 @@
+# Directories
+chocolatey-packages/
+
+# Files
+ChocolateStore.exe
+Ionic.Zip.dll
