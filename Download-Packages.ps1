@@ -6,7 +6,11 @@ if (!(Test-Path $pkgCachePath)) {
 
 [Xml]$o = Get-Content $chocoConfig
 
-foreach ($package in $o.packages.package.id) {
-    .\ChocolateStore.exe $pkgCachePath "$chocoApiPath/$package"
+foreach ($package in $o.packages.package) {
+    if ($package.version) {
+        .\ChocolateStore.exe $pkgCachePath "$chocoApiPath/$($package.id)/$($package.version)"
+    }
+
+    .\ChocolateStore.exe $pkgCachePath "$chocoApiPath/$($package.id)"
 #                                       https://chocolatey.org/api/v2/package/<package>    
 }
