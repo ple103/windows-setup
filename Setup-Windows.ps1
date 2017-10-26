@@ -1,6 +1,10 @@
+. .\Variables.ps1
+
 # Set PowerShell as default
 New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced `
     -Name DontUsePowerShellOnWinX -PropertyType DWord -Value 0 -Force
+
+Install-Module 'posh-git'
 
 # Show file extensions
 New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced `
@@ -21,4 +25,5 @@ Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-E
 . $profile
 
 # Install applications 
-choco install .\packages.config -Source .\chocolatey-packages -Y
+choco install $chocoConfig -Source $pkgCachePath -y
+choco upgrade all -y
