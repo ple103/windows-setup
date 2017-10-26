@@ -4,3 +4,4 @@ chocopkg/
 # Files
 ChocolateStore.exe
 Ionic.Zip.dll
+packages.config
