@@ -13,7 +13,6 @@ $PowerShell5ProfilePath = "$MyDocuments\WindowsPowerShell"
 $PowerShell7ProfilePath = "$MyDocuments\PowerShell"
 
 # Create symlink for Windows PowerShell 5.1 profile
-
 Write-Output "Creating symlink for PowerShell 5.1 profile"
 
 $params = @{
@@ -26,12 +25,12 @@ $params = @{
 New-Item @params
 
 # Create symlink for PowerShell 7 profile
-Write-Output "Creating symlink for PowerShell 5.1 profile"
+Write-Output "Creating symlink for PowerShell 7 profile"
 
 $params = @{
     Path     = "$PowerShell7ProfilePath\Microsoft.PowerShell_profile.ps1"
     ItemType = "SymbolicLink"
-    Value    = "$PSScriptRoot\Profiles\Microsoft.PowerShell5_profile.ps1"
+    Value    = "$PSScriptRoot\Profiles\Microsoft.PowerShell7_profile.ps1"
     Force    = $true
 }
 
