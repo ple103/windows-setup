@@ -12,15 +12,13 @@ if (-not
         [Security.Principal.WindowsBuiltInRole]::Administrator
     )
 ) {
-    #elevate script and exit current non-elevated runtime
-    Start-Process `
-        -FilePath 'powershell' `
-        -ArgumentList (
-            #flatten to single array
-            '-File', $MyInvocation.MyCommand.Source, $args `
-            | %{ $_ }
-        ) `
-        -Verb RunAs
+    # Elevate script and exit current shell
+    $params = @{
+        FilePath     = 'powershell'
+        ArgumentList = ('-File', $MyInvocation.MyCommand.Source, $args ` | ForEach-Object { $_ } )
+        Verb         = 'RunAs'
+    }
+    Start-Process @params
     exit
 }
 
