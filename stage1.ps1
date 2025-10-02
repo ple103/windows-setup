@@ -1,26 +1,8 @@
-# Written to be compatible with Windows PowerShell (5.1)
+#Requires -RunAsAdministrator
+#Requires -Version 5.1
 
 Write-Warning -Message "Configure OneDrive backup before continuing"
 Start-Sleep -Milliseconds 1000
-
-if (-not
-    # Current role
-    (New-Object Security.Principal.WindowsPrincipal(
-        [Security.Principal.WindowsIdentity]::GetCurrent()
-    # Is admin?
-    )).IsInRole(
-        [Security.Principal.WindowsBuiltInRole]::Administrator
-    )
-) {
-    # Elevate script and exit current shell
-    $params = @{
-        FilePath     = 'powershell'
-        ArgumentList = ('-File', $MyInvocation.MyCommand.Source, $args ` | ForEach-Object { $_ } )
-        Verb         = 'RunAs'
-    }
-    Start-Process @params
-    exit
-}
 
 Write-Host "Installing WinGet PowerShell module from PSGallery.."
 Install-PackageProvider -Name NuGet -Force | Out-Null
