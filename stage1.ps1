@@ -4,9 +4,26 @@
 Write-Warning -Message "Configure OneDrive backup before continuing"
 Start-Sleep -Milliseconds 1000
 
-Write-Host "Installing WinGet PowerShell module from PSGallery.."
-Install-PackageProvider -Name NuGet -Force | Out-Null
-Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+$winget = winget.exe
+
+if (-not $winget[0].Contains('Windows Package Manager')) {
+    Write-Host "Installing WinGet PowerShell module from PSGallery.."
+    Install-PackageProvider -Name NuGet -Force | Out-Null
+    Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+}
+
+$packages = @(
+    'Microsoft.VisualStudioCode',
+    'Git.Git',
+    'Microsoft.WindowsTerminal',
+    'Microsoft.PowerShell',
+    'BrianApps.Sizer.Dev',
+    'Microsoft.PowerToys'
+)
+
+foreach ($package in $packages) {
+    winget install --exact --id $package
+}
 
 $MyDocuments = [Environment]::GetFolderPath("MyDocuments")
 $PowerShell5ProfilePath = "$MyDocuments\WindowsPowerShell"
