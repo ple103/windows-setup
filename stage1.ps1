@@ -9,6 +9,22 @@ Write-Host "Installing WinGet PowerShell module from PSGallery.."
 Install-PackageProvider -Name NuGet -Force | Out-Null
 Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
 
+Set-Location -Path $env:USERPROFILE
+if (-not (Test-Path "Source")) {
+    New-Item -Name Source -ItemType Directory
+}
+
+$packages = @(
+    'Git',
+    'PowerShell',
+    'Microsoft.WindowsTerminal'
+    'GitHubDesktop'
+)
+
+foreach ($package in $packages) {
+    winget install --exact --id $package
+}
+
 $MyDocuments = [Environment]::GetFolderPath("MyDocuments")
 $PowerShell5ProfilePath = "$MyDocuments\WindowsPowerShell"
 $PowerShell7ProfilePath = "$MyDocuments\PowerShell"
