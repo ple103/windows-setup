@@ -4,21 +4,21 @@
 Write-Warning -Message "Configure OneDrive backup before continuing"
 Start-Sleep -Milliseconds 1000
 
-#TODO Add a check to skip if winget already installed
-Write-Host "Installing WinGet PowerShell module from PSGallery.."
-Install-PackageProvider -Name NuGet -Force | Out-Null
-Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+$winget = winget.exe
 
-Set-Location -Path $env:USERPROFILE
-if (-not (Test-Path "Source")) {
-    New-Item -Name Source -ItemType Directory
+if (-not $winget[0].Contains('Windows Package Manager')) {
+    Write-Host "Installing WinGet PowerShell module from PSGallery.."
+    Install-PackageProvider -Name NuGet -Force | Out-Null
+    Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
 }
 
 $packages = @(
-    'Git',
-    'PowerShell',
-    'Microsoft.WindowsTerminal'
-    'GitHubDesktop'
+    'Microsoft.VisualStudioCode',
+    'Git.Git',
+    'Microsoft.WindowsTerminal',
+    'Microsoft.PowerShell',
+    'BrianApps.Sizer.Dev',
+    'Microsoft.PowerToys'
 )
 
 foreach ($package in $packages) {
