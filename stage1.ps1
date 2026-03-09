@@ -17,8 +17,9 @@ $packages = @(
     'Git.Git',
     'Microsoft.WindowsTerminal',
     'Microsoft.PowerShell',
-    'BrianApps.Sizer.Dev',
     'Microsoft.PowerToys'
+    'AutoHotkey.AutoHotkey',
+    'BrianApps.Sizer.Dev'
 )
 
 foreach ($package in $packages) {
