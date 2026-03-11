@@ -1,5 +1,5 @@
 $NewItemParams = @{
-    Path     = ~/.gitconfig
+    Path     = "~/.gitconfig"
     ItemType = "SymbolicLink"
     Value    = "$PSScriptRoot\dotfiles\git\.gitconfig"
     Force    = $true
@@ -8,7 +8,7 @@ $NewItemParams = @{
 New-Item @NewItemParams
 
 $NewItemParams = @{
-    Path     = ~/.gitconfig-ple103
+    Path     = "~/.gitconfig-ple103"
     ItemType = "SymbolicLink"
     Value    = "$PSScriptRoot\dotfiles\git\.gitconfig-ple103"
     Force    = $true
@@ -17,7 +17,7 @@ $NewItemParams = @{
 New-Item @NewItemParams
 
 $NewItemParams = @{
-    Path     = ~/.gitconfig-work
+    Path     = "~/.gitconfig-work"
     ItemType = "SymbolicLink"
     Value    = "$PSScriptRoot\dotfiles\git\.gitconfig-work"
     Force    = $true
